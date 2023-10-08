@@ -1,0 +1,15 @@
+program teste8
+declare
+	integer age;
+begin
+	read(age);
+	if (age<18) then
+		write("crianca")
+	else
+		if (age >60) then
+			write("idoso")
+		else
+			write("adulto")
+		end
+	end;
+end

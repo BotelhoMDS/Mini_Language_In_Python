@@ -1,0 +1,28 @@
+program teste9
+declare
+	integer nota1, nota2, sub, total;
+begin
+	read(nota1);
+	read(nota2);
+	total := (nota1 + nota2)/2
+	if (total > 6) then
+		write("Aprovado")
+	else
+		read(sub);
+		if (nota1 >= nota2) then
+			total := (nota1 + sub)/2
+			if (total > 6) then
+				write("Aprovado")
+			else
+				write("Reprovado")
+			end
+		else
+			total := (nota2 + sub)/2
+			if (total > 6) then
+				write("Aprovado")
+			else
+				write("Reprovado")
+			end
+		end
+	end
+end

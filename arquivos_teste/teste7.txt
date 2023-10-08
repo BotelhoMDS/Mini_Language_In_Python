@@ -1,0 +1,11 @@
+program teste6
+declare
+    integer a, b, c, maior;
+begin
+    read(a);
+    read(b);
+    read(c);
+    % identifica o maior
+    maior:= (a>b and a>c)?a:(b>c)?b:c;
+    write(maior);
+end
