@@ -40,4 +40,45 @@ for run the test, run the following command in the terminal:
 pytest test_lexer.py 
 ```
 
+#### THE GRAMMAR OF MINI LANGUAGE - A GRAMÁTICA DA MINI LINGUAGEM
+
+```
+| Símbolo    | Regra de Produção                   |
+|------------|-----------------------------------|
+| program    | ::= program identifier body         |
+| body       | ::= [declare decl-list] begin stmt-list end |
+| decl-list  | ::= decl {";" decl}*               |
+| decl       | ::= type ident-list                |
+| ident-list | ::= identifier {"," identifier}*  |
+| type       | ::= integer | decimal             |
+| stmt-list  | ::= stmt {";" stmt}*               |
+| stmt       | ::= assign-stmt | if-stmt | while-stmt | read-stmt | write-stmt |
+| assign-stmt | ::= identifier ":=" simple_expr  |
+| if-stmt    | ::= if condition then stmt-list end |
+|            | ::= if condition then stmt-list else stmt-list end |
+| condition  | ::= expression                    |
+| do-while-stmt | ::= do stmt-list stmt-suffix     |
+| stmt-suffix | ::= while condition               |
+| for-stmt   | ::= for assign-stmt to condition do stmt-list end |
+|            | ::= while condition do stmt-list end |
+| read-stmt  | ::= read "(" identifier ")"       |
+| write-stmt | ::= write "(" writable ")"        |
+| writable   | ::= simple-expr | literal         |
+| expression | ::= simple-expr | simple-expr relop simple-expr |
+| simple-expr | ::= term | simple-expr addop term | "(" simple-expr ")" ? simple-expr ":" simple-expr |
+| term       | ::= factor-a | term mulop factor-a |
+| factor-a   | ::= factor | not factor | "-" factor |
+| factor     | ::= identifier | constant | "(" expression ")" |
+| relop      | ::= "=" | ">" | ">=" | "<" | "<=" | "<>" |
+| addop      | ::= "+" | "-" | or               |
+| mulop      | ::= "*" | "/" | mod | and        |
+| shiftop    | ::= "<<" | ">>" | "<<<" | ">>>"  |
+| constant   | ::= digit {digit}*               |
+| literal    | ::= " “" {caractere} "”"         |
+| identifier | ::= letter {letter | digit}*     |
+| letter     | ::= ... (list of letters)        |
+| digit      | ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| caractere  | ::= ... (list of ASCII characters, except " ) |
+```
+
 #### LEXER - ANALISADOR LÉXICO
