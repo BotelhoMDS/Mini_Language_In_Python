@@ -42,7 +42,7 @@ pytest test_lexer.py
 
 #### THE GRAMMAR OF MINI LANGUAGE - A GRAMÁTICA DA MINI LINGUAGEM
 
-```
+
 | Símbolo    | Regra de Produção                   |
 |------------|-----------------------------------|
 | program    | ::= program identifier body         |
@@ -79,6 +79,6 @@ pytest test_lexer.py
 | letter     | ::= ... (list of letters)        |
 | digit      | ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 | caractere  | ::= ... (list of ASCII characters, except " ) |
-```
+
 
 #### LEXER - ANALISADOR LÉXICO
