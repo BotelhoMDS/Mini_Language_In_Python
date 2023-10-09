@@ -40,10 +40,10 @@ for run the test, run the following command in the terminal:
 pytest test_lexer.py 
 ```
 
-#### THE GRAMMAR OF MINI LANGUAGE - A GRAMÁTICA DA MINI LINGUAGEM
+#### THE GRAMMAR OF MINI LANGUAGE - A GRAMÁTICA DA LINGUAGEM MINI
 
 
-| Símbolo    | Regra de Produção                   |
+| Símbolo  (symbol)  | Regra de Produção   (Production rule)                |
 |------------|-----------------------------------|
 | program    | ::= program identifier body         |
 | body       | ::= [declare decl-list] begin stmt-list end |
@@ -82,3 +82,7 @@ pytest test_lexer.py
 
 
 #### LEXER - ANALISADOR LÉXICO
+About the lexer constrution and model, we use the PLY package, this package is a python package criated for the construction of lexers and parsers, it use lex and yacc to do this.
+
+in the lexer we created the tokens and the rules for the tokens, the tokens are the symbols of the language, like the operators, the reserved words, the identifiers, the numbers, etc. the rules are the regular expressions that define the tokens in the text file. We as too the symbol table, who is reposible for save the identifiers in the text file for each escope.
+

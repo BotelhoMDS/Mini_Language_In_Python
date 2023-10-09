@@ -8,7 +8,7 @@ test_lexer = lexer()
 
 test_lexer.build()
 test_lexer.test(
-    " a = 3 + 4 -> Esse é o 'Hello World' do Mini Language in Python L3x3r "
+    " a = 3 + 4 -> Esse é o if 'Hello World' do Mini Language in Python L3x3r "
 )
 
 """

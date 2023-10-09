@@ -1,7 +1,13 @@
 import ply.lex as lex
+from symbol_table import symbol_table, escope
 
 
 class lexer(object):
+    def __init__(self):
+        self.lexer = None
+        self.escope = escope()
+        self.escope.push_stack() #created the global scope 
+
     # List of token names.   This is always required
     tokens = (
         'ID',  # Variables
@@ -46,6 +52,7 @@ class lexer(object):
         'AND',  # and
         'OR',  # or
         'NOT',  # not
+        'MOD',  # mod , remainder of division
     )
 
     reserved = {
@@ -66,7 +73,30 @@ class lexer(object):
         'and': 'AND',
         'or': 'OR',
         'not': 'NOT',
+        'mod': 'MOD',
     }
+    '''
+    Functions for working with symbol table and scope 
+    '''
+    def new_scope(self): 
+        self.escope.push_stack()
+    
+    def exit_scope(self):
+        self.escope.pop_stack()
+    
+    def add_symbol(self, symbol, value):
+        self.escope.current_table().add_symbol(symbol, value)
+
+    def verify_symbol_in_this_scope(self, symbol):
+        return self.escope.current_table().verify_symbol(symbol)
+    def get_symbol(self, symbol): # run in the scopes from the actual for the global 
+        for table in reversed(self.escope.table_stack):
+            if table.verify_symbol(symbol):
+                return table.get_symbol(symbol)
+        return None
+
+    def print_current_scope(self):
+        print(self.escope.current_table())
 
     """
         Regular expression rules for simple tokens
@@ -100,6 +130,9 @@ class lexer(object):
     def t_ID(self, t):
         r"""[a-zA-Z_][a-zA-Z_0-9]*"""
         t.type = self.reserved.get(t.value, 'ID')    # Check for reserved words
+        if t.type == 'ID':
+            if not self.verify_symbol_in_this_scope(t.value): #dont't add the symbol if it already exists
+                self.add_symbol(t.value, value=None) # add a new symbol to the symbol table
         return t
 
     def t_NUMBER(self, t):
@@ -124,7 +157,11 @@ class lexer(object):
     def t_error(self, t):
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
-
+    '''
+    Lexer functions 
+    '''
+    
+    
     def test(self, data):
         self.lexer.input(data)
         while True:
@@ -132,6 +169,9 @@ class lexer(object):
             if not tok:
                 break
             print(tok)
+
+        print(f"SYMBOL TABLE")
+        self.print_current_scope()
 
     def unit_test(self, data):
         self.lexer.input(data)
@@ -143,3 +183,5 @@ class lexer(object):
 
     def build(self, **kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
+
+   
