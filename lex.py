@@ -11,6 +11,7 @@ class lexer(object):
     # List of token names.   This is always required
     tokens = (
         'ID',  # Variables
+        'LITERAL', # LITERALS
         'NUMBER',  # Numbers
         'PLUS',  # +
         'MINUS',  # -
@@ -128,13 +129,16 @@ class lexer(object):
     """
 
     def t_ID(self, t):
-        r"""[a-zA-Z_][a-zA-Z_0-9]*"""
+        r"""[a-zA-Z][a-zA-Z0-9]*"""
         t.type = self.reserved.get(t.value, 'ID')    # Check for reserved words
         if t.type == 'ID':
             if not self.verify_symbol_in_this_scope(t.value): #dont't add the symbol if it already exists
                 self.add_symbol(t.value, value=None) # add a new symbol to the symbol table
         return t
-
+    
+    def t_LITERAL(self, t):
+        r'\"[^"]*\"'
+        return t
     def t_NUMBER(self, t):
         r"""\d+"""
         t.value = int(t.value)
