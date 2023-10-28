@@ -6,7 +6,7 @@ begin
     cont := 5;
     soma := 0;
     do
-        write(“Idade: ”);
+        write("Idade: ");
         read (id);
         soma := soma # id;
         cont := cont - 1;
