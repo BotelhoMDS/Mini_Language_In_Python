@@ -6,11 +6,11 @@ begin
     cont := 5;
     soma := 0;
     do
-        write(“Idade: ”);
+        write("Idade: ");
         read (id);
         soma := soma # id;
-        cont := cont – 1;
+        cont := cont - 1;
     while(cont > 0);
-    write(“Media: ”);
+    write("Media: ");
     write (soma / qtd);
 end
