@@ -1,5 +1,6 @@
 import ply.lex as lex
 from symbol_table import symbol_table, escope
+import ply.yacc as yacc
 
 
 class lexer(object):
@@ -54,6 +55,7 @@ class lexer(object):
         'OR',  # or
         'NOT',  # not
         'MOD',  # mod , remainder of division
+        'INTERROGATION',  # ?
     )
 
     reserved = {
@@ -121,6 +123,7 @@ class lexer(object):
     t_TRIPLELESS = r'<<<'
     t_TRIPLEGREATER = r'>>>'
     t_LESSGREATER = r'<>'
+    t_INTERROGATION = r'\?'
 
     t_ignore = ' \t'
 
@@ -187,5 +190,3 @@ class lexer(object):
 
     def build(self, **kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
-
-   

@@ -3,6 +3,7 @@ from ply.lex import LexToken
 from lex import lexer
 
 
+
 def test_lexer_teste1_type():
     with open('./lexer_tests/teste1.txt', 'r') as arquivo:
         teste = arquivo.read()
