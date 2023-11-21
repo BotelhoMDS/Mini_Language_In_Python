@@ -25,19 +25,11 @@ class parser(object):
         '''declaration_list : declaration declaration_list_aux'''
 
     def p_declaration_list_aux(self,p):#Auxiliar pra evitar ambiguidade
-        '''declaration_list_aux : declaration
-                            | empty'''
+        '''declaration_list_aux : SEMICOLON declaration
+                            | SEMICOLON'''
     
     def p_declaration(self,p):
-        '''declaration : type identifier_list declaration_aux'''
-
-    def p_declaration_aux(self,p):#Auxiliar pra evitar ambiguidade
-        '''declaration : COMMA identifier_list SEMICOLON
-                | SEMICOLON'''
-
-    def p_type(self,p):
-        '''type : INTEGER 
-                | DECIMAL'''
+        '''declaration : type identifier_list'''
 
     def p_identifier_list(self,p):
         '''identifier_list : ID identifier_list_aux'''  
@@ -45,6 +37,10 @@ class parser(object):
     def p_identifier_list_aux(self,p):
         '''identifier_list : COMMA identifier_list
                             | empty '''  
+
+    def p_type(self,p):
+        '''type : INTEGER 
+                | DECIMAL'''
 
     def p_statement_list(self,p): #revisar depois 
         '''statement_list : statement statement_prime
