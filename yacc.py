@@ -10,6 +10,9 @@ class parser(object):
         self.reserved = self.lexer.reserved
         self.parser = yacc.yacc(module=self)
 
+    def p_empty(self,p): #Produções vazias, usado para retirar ambiguidades em certas regras como p_declaration_list
+        'empty :'
+        pass
 
 
     def p_program(self,p):
@@ -19,19 +22,29 @@ class parser(object):
         '''body : DECLARE declaration_list BEGIN statement_list END'''
 
     def p_declaration_list(self,p):
-        '''declaration_list : declaration declaration
-                            | declaration'''
+        '''declaration_list : declaration declaration_list_aux'''
+
+    def p_declaration_list_aux(self,p):#Auxiliar pra evitar ambiguidade
+        '''declaration_list_aux : declaration
+                            | empty'''
+    
     def p_declaration(self,p):
-        '''declaration : type identifier_list COMMA identifier_list SEMICOLON
-                | type identifier_list SEMICOLON'''
+        '''declaration : type identifier_list declaration_aux'''
+
+    def p_declaration_aux(self,p):#Auxiliar pra evitar ambiguidade
+        '''declaration : COMMA identifier_list SEMICOLON
+                | SEMICOLON'''
 
     def p_type(self,p):
         '''type : INTEGER 
                 | DECIMAL'''
 
     def p_identifier_list(self,p):
-        '''identifier_list : ID COMMA identifier_list
-                            | ID '''   
+        '''identifier_list : ID identifier_list_aux'''  
+
+    def p_identifier_list_aux(self,p):
+        '''identifier_list : COMMA identifier_list
+                            | empty '''  
 
     def p_statement_list(self,p): #revisar depois 
         '''statement_list : statement statement_prime
@@ -55,8 +68,11 @@ class parser(object):
         '''assign_statement : ID ASSIGN expression'''
 
     def p_if_statement(self,p):
-        '''if_statement : IF condition THEN statement_list END
-                        | IF condition THEN statement_list ELSE statement_list END'''
+        '''if_statement : IF condition THEN statement_list if_statement_aux'''
+
+    def p_if_statement_aux(self,p):
+        '''if_statement : END
+                        | ELSE statement_list END'''
 
     def p_while_statement(self,p):
         '''while_statement : WHILE condition DO statement_list END'''
@@ -78,8 +94,10 @@ class parser(object):
     def p_condition(self,p):
         '''condition : expression'''
     def p_expression(self,p):
-        '''expression : simple_expression
-                    | simple_expression relop simple_expression'''
+        '''expression : simple_expression expression_aux'''
+    def p_expression_aux(self,p):
+        '''expression : relop simple_expression
+                    | empty'''
     def p_relop(self,p):
         '''relop : EQUAL 
                 | LESS 
@@ -92,8 +110,6 @@ class parser(object):
         '''simple_expression : term
                             | LPAREN simple_expression RPAREN INTERROGATION simple_expression COLON simple_expression
                             | simple_expression addop term
-                            | simple_expression mulop term
-                            | LPAREN simple_expression RPAREN
                        '''
 
     def p_addop(self,p):
