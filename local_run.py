@@ -13,7 +13,7 @@ test_lexer.test(
     ' a = 3 + 4 -> aki234asd Esse ? é o _ if "Hello World" do Mini Language : in Python L3x3r '  
 )
 
-parse = yacc.yacc()
+
 
 while True: 
     try:

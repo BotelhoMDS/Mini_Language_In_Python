@@ -100,9 +100,13 @@ class parser(object):
                 | GREATEREQUAL 
                 | LESSGREATER'''
 
+    def p_par_expression(self,p):
+        '''par_expression : LPAREN expression RPAREN'''
+
+        
     def p_simple_expression(self,p):
         '''simple_expression : term
-                            | LPAREN simple_expression RPAREN INTERROGATION simple_expression COLON simple_expression
+                            | par_expression INTERROGATION simple_expression COLON simple_expression
                             | simple_expression addop term
                        '''
 
@@ -129,7 +133,8 @@ class parser(object):
     def p_factor(self,p):
         '''factor : ID 
                 | NUMBER 
-                | LPAREN expression RPAREN'''
+                | par_expression'''
+        
 
     def p_literal(self,p):
         '''literal : LITERAL'''
