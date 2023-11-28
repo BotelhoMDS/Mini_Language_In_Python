@@ -72,7 +72,10 @@ class parser(object):
         '''while_statement : WHILE condition DO statement_list END'''
     
     def p_do_while_statement(self,p):
-        '''do_while_statement : DO statement_list WHILE condition SEMICOLON'''
+        '''do_while_statement : DO statement_list do_while_statement_suffix'''
+
+    def p_do_while_statement_suffix(self,p):
+        '''do_while_statement_suffix : WHILE condition'''
 
     def p_for_statement(self,p):
         '''for_statement : FOR assign_statement TO condition DO statement_list END'''

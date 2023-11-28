@@ -6,14 +6,14 @@ begin
     read(b);
     read(c);
     % identifica o maior
-    if ( a>b and a>c ) then
-        maior := a
+    if ( a>b and (a>c) ) then
+        maior := a;
     else
         if (b>c) then
-            maior := b
+            maior := b;
         else
-            maior := c
+            maior := c;
         end
-    end;
+    end
     write(maior);
 end

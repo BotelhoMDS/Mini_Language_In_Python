@@ -1,4 +1,4 @@
-program teste6
+program teste7
 declare
     integer a, b, c, maior;
 begin
@@ -6,6 +6,6 @@ begin
     read(b);
     read(c);
     % identifica o maior
-    maior:= (a>b and a>c)?a:(b>c)?b:c;
+    maior:= (a>b and (a>c))?a:(b>c)?b:c;
     write(maior);
 end

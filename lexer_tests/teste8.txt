@@ -4,12 +4,12 @@ declare
 begin
 	read(age);
 	if (age<18) then
-		write("crianca")
+		write("crianca");
 	else
 		if (age >60) then
-			write("idoso")
+			write("idoso");
 		else
-			write("adulto")
+			write("adulto");
 		end
 	end;
 end

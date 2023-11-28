@@ -1,0 +1,1922 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    DOT
+    DOUBLEGREATER
+    DOUBLELESS
+    TRIPLEGREATER
+    TRIPLELESS
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM ID body
+Rule 2     body -> DECLARE declaration_list BEGIN statement_list END
+Rule 3     declaration_list -> declaration SEMICOLON declaration_list_aux
+Rule 4     declaration_list_aux -> declaration_list
+Rule 5     declaration_list_aux -> empty
+Rule 6     declaration -> type identifier_list
+Rule 7     identifier_list -> ID identifier_list_aux
+Rule 8     identifier_list_aux -> COMMA identifier_list
+Rule 9     identifier_list_aux -> empty
+Rule 10    type -> INTEGER
+Rule 11    type -> DECIMAL
+Rule 12    statement_list -> statement SEMICOLON statement_prime
+Rule 13    statement_prime -> statement_list
+Rule 14    statement_prime -> empty
+Rule 15    statement -> assign_statement
+Rule 16    statement -> if_statement
+Rule 17    statement -> while_statement
+Rule 18    statement -> for_statement
+Rule 19    statement -> read_statement
+Rule 20    statement -> write_statement
+Rule 21    statement -> do_while_statement
+Rule 22    assign_statement -> ID ASSIGN expression
+Rule 23    if_statement -> IF condition THEN statement_list if_statement_aux
+Rule 24    if_statement_aux -> END
+Rule 25    if_statement_aux -> ELSE statement_list END
+Rule 26    while_statement -> WHILE condition DO statement_list END
+Rule 27    do_while_statement -> DO statement_list do_while_statement_suffix
+Rule 28    do_while_statement_suffix -> WHILE condition
+Rule 29    for_statement -> FOR assign_statement TO condition DO statement_list END
+Rule 30    read_statement -> READ LPAREN ID RPAREN
+Rule 31    write_statement -> WRITE LPAREN writable RPAREN
+Rule 32    writable -> simple_expression
+Rule 33    writable -> literal
+Rule 34    condition -> expression
+Rule 35    expression -> simple_expression expression_aux
+Rule 36    expression_aux -> relop simple_expression
+Rule 37    expression_aux -> empty
+Rule 38    relop -> EQUAL
+Rule 39    relop -> LESS
+Rule 40    relop -> LESSEQUAL
+Rule 41    relop -> GREATER
+Rule 42    relop -> GREATEREQUAL
+Rule 43    relop -> LESSGREATER
+Rule 44    par_expression -> LPAREN expression RPAREN
+Rule 45    simple_expression -> term
+Rule 46    simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression
+Rule 47    simple_expression -> simple_expression addop term
+Rule 48    addop -> PLUS
+Rule 49    addop -> MINUS
+Rule 50    addop -> OR
+Rule 51    mulop -> MULTI
+Rule 52    mulop -> DIVIDE
+Rule 53    mulop -> MOD
+Rule 54    mulop -> AND
+Rule 55    term -> factor_a
+Rule 56    term -> term mulop factor_a
+Rule 57    factor_a -> factor
+Rule 58    factor_a -> NOT factor
+Rule 59    factor_a -> MINUS factor
+Rule 60    factor -> ID
+Rule 61    factor -> NUMBER
+Rule 62    factor -> par_expression
+Rule 63    literal -> LITERAL
+Rule 64    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 54
+ASSIGN               : 22
+BEGIN                : 2
+COLON                : 46
+COMMA                : 8
+COMMENT              : 
+DECIMAL              : 11
+DECLARE              : 2
+DIVIDE               : 52
+DO                   : 26 27 29
+DOT                  : 
+DOUBLEGREATER        : 
+DOUBLELESS           : 
+ELSE                 : 25
+END                  : 2 24 25 26 29
+EQUAL                : 38
+FOR                  : 29
+GREATER              : 41
+GREATEREQUAL         : 42
+ID                   : 1 7 22 30 60
+IF                   : 23
+INTEGER              : 10
+INTERROGATION        : 46
+LESS                 : 39
+LESSEQUAL            : 40
+LESSGREATER          : 43
+LITERAL              : 63
+LPAREN               : 30 31 44
+MINUS                : 49 59
+MOD                  : 53
+MULTI                : 51
+NOT                  : 58
+NUMBER               : 61
+OR                   : 50
+PLUS                 : 48
+PROGRAM              : 1
+READ                 : 30
+RPAREN               : 30 31 44
+SEMICOLON            : 3 12
+THEN                 : 23
+TO                   : 29
+TRIPLEGREATER        : 
+TRIPLELESS           : 
+WHILE                : 26 28
+WRITE                : 31
+error                : 
+
+Nonterminals, with rules where they appear
+
+addop                : 47
+assign_statement     : 15 29
+body                 : 1
+condition            : 23 26 28 29
+declaration          : 3
+declaration_list     : 2 4
+declaration_list_aux : 3
+do_while_statement   : 21
+do_while_statement_suffix : 27
+empty                : 5 9 14 37
+expression           : 22 34 44
+expression_aux       : 35
+factor               : 57 58 59
+factor_a             : 55 56
+for_statement        : 18
+identifier_list      : 6 8
+identifier_list_aux  : 7
+if_statement         : 16
+if_statement_aux     : 23
+literal              : 33
+mulop                : 56
+par_expression       : 46 62
+program              : 0
+read_statement       : 19
+relop                : 36
+simple_expression    : 32 35 36 46 46 47
+statement            : 12
+statement_list       : 2 13 23 25 26 27 29
+statement_prime      : 12
+term                 : 45 47 56
+type                 : 6
+while_statement      : 17
+writable             : 31
+write_statement      : 20
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID body
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID body
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . body
+    (2) body -> . DECLARE declaration_list BEGIN statement_list END
+
+    DECLARE         shift and go to state 5
+
+    body                           shift and go to state 4
+
+state 4
+
+    (1) program -> PROGRAM ID body .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID body .)
+
+
+state 5
+
+    (2) body -> DECLARE . declaration_list BEGIN statement_list END
+    (3) declaration_list -> . declaration SEMICOLON declaration_list_aux
+    (6) declaration -> . type identifier_list
+    (10) type -> . INTEGER
+    (11) type -> . DECIMAL
+
+    INTEGER         shift and go to state 9
+    DECIMAL         shift and go to state 10
+
+    declaration_list               shift and go to state 6
+    declaration                    shift and go to state 7
+    type                           shift and go to state 8
+
+state 6
+
+    (2) body -> DECLARE declaration_list . BEGIN statement_list END
+
+    BEGIN           shift and go to state 11
+
+
+state 7
+
+    (3) declaration_list -> declaration . SEMICOLON declaration_list_aux
+
+    SEMICOLON       shift and go to state 12
+
+
+state 8
+
+    (6) declaration -> type . identifier_list
+    (7) identifier_list -> . ID identifier_list_aux
+
+    ID              shift and go to state 14
+
+    identifier_list                shift and go to state 13
+
+state 9
+
+    (10) type -> INTEGER .
+
+    ID              reduce using rule 10 (type -> INTEGER .)
+
+
+state 10
+
+    (11) type -> DECIMAL .
+
+    ID              reduce using rule 11 (type -> DECIMAL .)
+
+
+state 11
+
+    (2) body -> DECLARE declaration_list BEGIN . statement_list END
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    statement_list                 shift and go to state 15
+    statement                      shift and go to state 16
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 12
+
+    (3) declaration_list -> declaration SEMICOLON . declaration_list_aux
+    (4) declaration_list_aux -> . declaration_list
+    (5) declaration_list_aux -> . empty
+    (3) declaration_list -> . declaration SEMICOLON declaration_list_aux
+    (64) empty -> .
+    (6) declaration -> . type identifier_list
+    (10) type -> . INTEGER
+    (11) type -> . DECIMAL
+
+    BEGIN           reduce using rule 64 (empty -> .)
+    INTEGER         shift and go to state 9
+    DECIMAL         shift and go to state 10
+
+    declaration                    shift and go to state 7
+    declaration_list_aux           shift and go to state 31
+    declaration_list               shift and go to state 32
+    empty                          shift and go to state 33
+    type                           shift and go to state 8
+
+state 13
+
+    (6) declaration -> type identifier_list .
+
+    SEMICOLON       reduce using rule 6 (declaration -> type identifier_list .)
+
+
+state 14
+
+    (7) identifier_list -> ID . identifier_list_aux
+    (8) identifier_list_aux -> . COMMA identifier_list
+    (9) identifier_list_aux -> . empty
+    (64) empty -> .
+
+    COMMA           shift and go to state 35
+    SEMICOLON       reduce using rule 64 (empty -> .)
+
+    identifier_list_aux            shift and go to state 34
+    empty                          shift and go to state 36
+
+state 15
+
+    (2) body -> DECLARE declaration_list BEGIN statement_list . END
+
+    END             shift and go to state 37
+
+
+state 16
+
+    (12) statement_list -> statement . SEMICOLON statement_prime
+
+    SEMICOLON       shift and go to state 38
+
+
+state 17
+
+    (15) statement -> assign_statement .
+
+    SEMICOLON       reduce using rule 15 (statement -> assign_statement .)
+
+
+state 18
+
+    (16) statement -> if_statement .
+
+    SEMICOLON       reduce using rule 16 (statement -> if_statement .)
+
+
+state 19
+
+    (17) statement -> while_statement .
+
+    SEMICOLON       reduce using rule 17 (statement -> while_statement .)
+
+
+state 20
+
+    (18) statement -> for_statement .
+
+    SEMICOLON       reduce using rule 18 (statement -> for_statement .)
+
+
+state 21
+
+    (19) statement -> read_statement .
+
+    SEMICOLON       reduce using rule 19 (statement -> read_statement .)
+
+
+state 22
+
+    (20) statement -> write_statement .
+
+    SEMICOLON       reduce using rule 20 (statement -> write_statement .)
+
+
+state 23
+
+    (21) statement -> do_while_statement .
+
+    SEMICOLON       reduce using rule 21 (statement -> do_while_statement .)
+
+
+state 24
+
+    (22) assign_statement -> ID . ASSIGN expression
+
+    ASSIGN          shift and go to state 39
+
+
+state 25
+
+    (23) if_statement -> IF . condition THEN statement_list if_statement_aux
+    (34) condition -> . expression
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    condition                      shift and go to state 40
+    expression                     shift and go to state 41
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 26
+
+    (26) while_statement -> WHILE . condition DO statement_list END
+    (34) condition -> . expression
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    condition                      shift and go to state 52
+    expression                     shift and go to state 41
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 27
+
+    (27) do_while_statement -> DO . statement_list do_while_statement_suffix
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    statement_list                 shift and go to state 53
+    statement                      shift and go to state 16
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 28
+
+    (29) for_statement -> FOR . assign_statement TO condition DO statement_list END
+    (22) assign_statement -> . ID ASSIGN expression
+
+    ID              shift and go to state 24
+
+    assign_statement               shift and go to state 54
+
+state 29
+
+    (30) read_statement -> READ . LPAREN ID RPAREN
+
+    LPAREN          shift and go to state 55
+
+
+state 30
+
+    (31) write_statement -> WRITE . LPAREN writable RPAREN
+
+    LPAREN          shift and go to state 56
+
+
+state 31
+
+    (3) declaration_list -> declaration SEMICOLON declaration_list_aux .
+
+    BEGIN           reduce using rule 3 (declaration_list -> declaration SEMICOLON declaration_list_aux .)
+
+
+state 32
+
+    (4) declaration_list_aux -> declaration_list .
+
+    BEGIN           reduce using rule 4 (declaration_list_aux -> declaration_list .)
+
+
+state 33
+
+    (5) declaration_list_aux -> empty .
+
+    BEGIN           reduce using rule 5 (declaration_list_aux -> empty .)
+
+
+state 34
+
+    (7) identifier_list -> ID identifier_list_aux .
+
+    SEMICOLON       reduce using rule 7 (identifier_list -> ID identifier_list_aux .)
+
+
+state 35
+
+    (8) identifier_list_aux -> COMMA . identifier_list
+    (7) identifier_list -> . ID identifier_list_aux
+
+    ID              shift and go to state 14
+
+    identifier_list                shift and go to state 57
+
+state 36
+
+    (9) identifier_list_aux -> empty .
+
+    SEMICOLON       reduce using rule 9 (identifier_list_aux -> empty .)
+
+
+state 37
+
+    (2) body -> DECLARE declaration_list BEGIN statement_list END .
+
+    $end            reduce using rule 2 (body -> DECLARE declaration_list BEGIN statement_list END .)
+
+
+state 38
+
+    (12) statement_list -> statement SEMICOLON . statement_prime
+    (13) statement_prime -> . statement_list
+    (14) statement_prime -> . empty
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (64) empty -> .
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+  ! shift/reduce conflict for WHILE resolved as shift
+    END             reduce using rule 64 (empty -> .)
+    ELSE            reduce using rule 64 (empty -> .)
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+  ! WHILE           [ reduce using rule 64 (empty -> .) ]
+
+    statement                      shift and go to state 16
+    statement_prime                shift and go to state 58
+    statement_list                 shift and go to state 59
+    empty                          shift and go to state 60
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 39
+
+    (22) assign_statement -> ID ASSIGN . expression
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    expression                     shift and go to state 61
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 40
+
+    (23) if_statement -> IF condition . THEN statement_list if_statement_aux
+
+    THEN            shift and go to state 62
+
+
+state 41
+
+    (34) condition -> expression .
+
+    THEN            reduce using rule 34 (condition -> expression .)
+    DO              reduce using rule 34 (condition -> expression .)
+    SEMICOLON       reduce using rule 34 (condition -> expression .)
+
+
+state 42
+
+    (35) expression -> simple_expression . expression_aux
+    (47) simple_expression -> simple_expression . addop term
+    (36) expression_aux -> . relop simple_expression
+    (37) expression_aux -> . empty
+    (48) addop -> . PLUS
+    (49) addop -> . MINUS
+    (50) addop -> . OR
+    (38) relop -> . EQUAL
+    (39) relop -> . LESS
+    (40) relop -> . LESSEQUAL
+    (41) relop -> . GREATER
+    (42) relop -> . GREATEREQUAL
+    (43) relop -> . LESSGREATER
+    (64) empty -> .
+
+    PLUS            shift and go to state 67
+    MINUS           shift and go to state 68
+    OR              shift and go to state 69
+    EQUAL           shift and go to state 70
+    LESS            shift and go to state 71
+    LESSEQUAL       shift and go to state 72
+    GREATER         shift and go to state 73
+    GREATEREQUAL    shift and go to state 74
+    LESSGREATER     shift and go to state 75
+    THEN            reduce using rule 64 (empty -> .)
+    DO              reduce using rule 64 (empty -> .)
+    SEMICOLON       reduce using rule 64 (empty -> .)
+    TO              reduce using rule 64 (empty -> .)
+    RPAREN          reduce using rule 64 (empty -> .)
+
+    expression_aux                 shift and go to state 63
+    addop                          shift and go to state 64
+    relop                          shift and go to state 65
+    empty                          shift and go to state 66
+
+state 43
+
+    (45) simple_expression -> term .
+    (56) term -> term . mulop factor_a
+    (51) mulop -> . MULTI
+    (52) mulop -> . DIVIDE
+    (53) mulop -> . MOD
+    (54) mulop -> . AND
+
+    PLUS            reduce using rule 45 (simple_expression -> term .)
+    MINUS           reduce using rule 45 (simple_expression -> term .)
+    OR              reduce using rule 45 (simple_expression -> term .)
+    EQUAL           reduce using rule 45 (simple_expression -> term .)
+    LESS            reduce using rule 45 (simple_expression -> term .)
+    LESSEQUAL       reduce using rule 45 (simple_expression -> term .)
+    GREATER         reduce using rule 45 (simple_expression -> term .)
+    GREATEREQUAL    reduce using rule 45 (simple_expression -> term .)
+    LESSGREATER     reduce using rule 45 (simple_expression -> term .)
+    THEN            reduce using rule 45 (simple_expression -> term .)
+    DO              reduce using rule 45 (simple_expression -> term .)
+    SEMICOLON       reduce using rule 45 (simple_expression -> term .)
+    TO              reduce using rule 45 (simple_expression -> term .)
+    RPAREN          reduce using rule 45 (simple_expression -> term .)
+    COLON           reduce using rule 45 (simple_expression -> term .)
+    MULTI           shift and go to state 77
+    DIVIDE          shift and go to state 78
+    MOD             shift and go to state 79
+    AND             shift and go to state 80
+
+    mulop                          shift and go to state 76
+
+state 44
+
+    (46) simple_expression -> par_expression . INTERROGATION simple_expression COLON simple_expression
+    (62) factor -> par_expression .
+
+    INTERROGATION   shift and go to state 81
+    MULTI           reduce using rule 62 (factor -> par_expression .)
+    DIVIDE          reduce using rule 62 (factor -> par_expression .)
+    MOD             reduce using rule 62 (factor -> par_expression .)
+    AND             reduce using rule 62 (factor -> par_expression .)
+    PLUS            reduce using rule 62 (factor -> par_expression .)
+    MINUS           reduce using rule 62 (factor -> par_expression .)
+    OR              reduce using rule 62 (factor -> par_expression .)
+    EQUAL           reduce using rule 62 (factor -> par_expression .)
+    LESS            reduce using rule 62 (factor -> par_expression .)
+    LESSEQUAL       reduce using rule 62 (factor -> par_expression .)
+    GREATER         reduce using rule 62 (factor -> par_expression .)
+    GREATEREQUAL    reduce using rule 62 (factor -> par_expression .)
+    LESSGREATER     reduce using rule 62 (factor -> par_expression .)
+    THEN            reduce using rule 62 (factor -> par_expression .)
+    DO              reduce using rule 62 (factor -> par_expression .)
+    SEMICOLON       reduce using rule 62 (factor -> par_expression .)
+    TO              reduce using rule 62 (factor -> par_expression .)
+    RPAREN          reduce using rule 62 (factor -> par_expression .)
+    COLON           reduce using rule 62 (factor -> par_expression .)
+
+
+state 45
+
+    (55) term -> factor_a .
+
+    MULTI           reduce using rule 55 (term -> factor_a .)
+    DIVIDE          reduce using rule 55 (term -> factor_a .)
+    MOD             reduce using rule 55 (term -> factor_a .)
+    AND             reduce using rule 55 (term -> factor_a .)
+    PLUS            reduce using rule 55 (term -> factor_a .)
+    MINUS           reduce using rule 55 (term -> factor_a .)
+    OR              reduce using rule 55 (term -> factor_a .)
+    EQUAL           reduce using rule 55 (term -> factor_a .)
+    LESS            reduce using rule 55 (term -> factor_a .)
+    LESSEQUAL       reduce using rule 55 (term -> factor_a .)
+    GREATER         reduce using rule 55 (term -> factor_a .)
+    GREATEREQUAL    reduce using rule 55 (term -> factor_a .)
+    LESSGREATER     reduce using rule 55 (term -> factor_a .)
+    THEN            reduce using rule 55 (term -> factor_a .)
+    DO              reduce using rule 55 (term -> factor_a .)
+    SEMICOLON       reduce using rule 55 (term -> factor_a .)
+    TO              reduce using rule 55 (term -> factor_a .)
+    RPAREN          reduce using rule 55 (term -> factor_a .)
+    COLON           reduce using rule 55 (term -> factor_a .)
+
+
+state 46
+
+    (44) par_expression -> LPAREN . expression RPAREN
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    expression                     shift and go to state 82
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 47
+
+    (57) factor_a -> factor .
+
+    MULTI           reduce using rule 57 (factor_a -> factor .)
+    DIVIDE          reduce using rule 57 (factor_a -> factor .)
+    MOD             reduce using rule 57 (factor_a -> factor .)
+    AND             reduce using rule 57 (factor_a -> factor .)
+    PLUS            reduce using rule 57 (factor_a -> factor .)
+    MINUS           reduce using rule 57 (factor_a -> factor .)
+    OR              reduce using rule 57 (factor_a -> factor .)
+    EQUAL           reduce using rule 57 (factor_a -> factor .)
+    LESS            reduce using rule 57 (factor_a -> factor .)
+    LESSEQUAL       reduce using rule 57 (factor_a -> factor .)
+    GREATER         reduce using rule 57 (factor_a -> factor .)
+    GREATEREQUAL    reduce using rule 57 (factor_a -> factor .)
+    LESSGREATER     reduce using rule 57 (factor_a -> factor .)
+    THEN            reduce using rule 57 (factor_a -> factor .)
+    DO              reduce using rule 57 (factor_a -> factor .)
+    SEMICOLON       reduce using rule 57 (factor_a -> factor .)
+    TO              reduce using rule 57 (factor_a -> factor .)
+    RPAREN          reduce using rule 57 (factor_a -> factor .)
+    COLON           reduce using rule 57 (factor_a -> factor .)
+
+
+state 48
+
+    (58) factor_a -> NOT . factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+    (44) par_expression -> . LPAREN expression RPAREN
+
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+    LPAREN          shift and go to state 46
+
+    factor                         shift and go to state 83
+    par_expression                 shift and go to state 84
+
+state 49
+
+    (59) factor_a -> MINUS . factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+    (44) par_expression -> . LPAREN expression RPAREN
+
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+    LPAREN          shift and go to state 46
+
+    factor                         shift and go to state 85
+    par_expression                 shift and go to state 84
+
+state 50
+
+    (60) factor -> ID .
+
+    MULTI           reduce using rule 60 (factor -> ID .)
+    DIVIDE          reduce using rule 60 (factor -> ID .)
+    MOD             reduce using rule 60 (factor -> ID .)
+    AND             reduce using rule 60 (factor -> ID .)
+    PLUS            reduce using rule 60 (factor -> ID .)
+    MINUS           reduce using rule 60 (factor -> ID .)
+    OR              reduce using rule 60 (factor -> ID .)
+    EQUAL           reduce using rule 60 (factor -> ID .)
+    LESS            reduce using rule 60 (factor -> ID .)
+    LESSEQUAL       reduce using rule 60 (factor -> ID .)
+    GREATER         reduce using rule 60 (factor -> ID .)
+    GREATEREQUAL    reduce using rule 60 (factor -> ID .)
+    LESSGREATER     reduce using rule 60 (factor -> ID .)
+    THEN            reduce using rule 60 (factor -> ID .)
+    DO              reduce using rule 60 (factor -> ID .)
+    SEMICOLON       reduce using rule 60 (factor -> ID .)
+    TO              reduce using rule 60 (factor -> ID .)
+    RPAREN          reduce using rule 60 (factor -> ID .)
+    COLON           reduce using rule 60 (factor -> ID .)
+
+
+state 51
+
+    (61) factor -> NUMBER .
+
+    MULTI           reduce using rule 61 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 61 (factor -> NUMBER .)
+    MOD             reduce using rule 61 (factor -> NUMBER .)
+    AND             reduce using rule 61 (factor -> NUMBER .)
+    PLUS            reduce using rule 61 (factor -> NUMBER .)
+    MINUS           reduce using rule 61 (factor -> NUMBER .)
+    OR              reduce using rule 61 (factor -> NUMBER .)
+    EQUAL           reduce using rule 61 (factor -> NUMBER .)
+    LESS            reduce using rule 61 (factor -> NUMBER .)
+    LESSEQUAL       reduce using rule 61 (factor -> NUMBER .)
+    GREATER         reduce using rule 61 (factor -> NUMBER .)
+    GREATEREQUAL    reduce using rule 61 (factor -> NUMBER .)
+    LESSGREATER     reduce using rule 61 (factor -> NUMBER .)
+    THEN            reduce using rule 61 (factor -> NUMBER .)
+    DO              reduce using rule 61 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 61 (factor -> NUMBER .)
+    TO              reduce using rule 61 (factor -> NUMBER .)
+    RPAREN          reduce using rule 61 (factor -> NUMBER .)
+    COLON           reduce using rule 61 (factor -> NUMBER .)
+
+
+state 52
+
+    (26) while_statement -> WHILE condition . DO statement_list END
+
+    DO              shift and go to state 86
+
+
+state 53
+
+    (27) do_while_statement -> DO statement_list . do_while_statement_suffix
+    (28) do_while_statement_suffix -> . WHILE condition
+
+    WHILE           shift and go to state 88
+
+    do_while_statement_suffix      shift and go to state 87
+
+state 54
+
+    (29) for_statement -> FOR assign_statement . TO condition DO statement_list END
+
+    TO              shift and go to state 89
+
+
+state 55
+
+    (30) read_statement -> READ LPAREN . ID RPAREN
+
+    ID              shift and go to state 90
+
+
+state 56
+
+    (31) write_statement -> WRITE LPAREN . writable RPAREN
+    (32) writable -> . simple_expression
+    (33) writable -> . literal
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (63) literal -> . LITERAL
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LITERAL         shift and go to state 94
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    writable                       shift and go to state 91
+    simple_expression              shift and go to state 92
+    literal                        shift and go to state 93
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 57
+
+    (8) identifier_list_aux -> COMMA identifier_list .
+
+    SEMICOLON       reduce using rule 8 (identifier_list_aux -> COMMA identifier_list .)
+
+
+state 58
+
+    (12) statement_list -> statement SEMICOLON statement_prime .
+
+    END             reduce using rule 12 (statement_list -> statement SEMICOLON statement_prime .)
+    WHILE           reduce using rule 12 (statement_list -> statement SEMICOLON statement_prime .)
+    ELSE            reduce using rule 12 (statement_list -> statement SEMICOLON statement_prime .)
+
+
+state 59
+
+    (13) statement_prime -> statement_list .
+
+    END             reduce using rule 13 (statement_prime -> statement_list .)
+    WHILE           reduce using rule 13 (statement_prime -> statement_list .)
+    ELSE            reduce using rule 13 (statement_prime -> statement_list .)
+
+
+state 60
+
+    (14) statement_prime -> empty .
+
+    END             reduce using rule 14 (statement_prime -> empty .)
+    WHILE           reduce using rule 14 (statement_prime -> empty .)
+    ELSE            reduce using rule 14 (statement_prime -> empty .)
+
+
+state 61
+
+    (22) assign_statement -> ID ASSIGN expression .
+
+    SEMICOLON       reduce using rule 22 (assign_statement -> ID ASSIGN expression .)
+    TO              reduce using rule 22 (assign_statement -> ID ASSIGN expression .)
+
+
+state 62
+
+    (23) if_statement -> IF condition THEN . statement_list if_statement_aux
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    statement_list                 shift and go to state 95
+    statement                      shift and go to state 16
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 63
+
+    (35) expression -> simple_expression expression_aux .
+
+    THEN            reduce using rule 35 (expression -> simple_expression expression_aux .)
+    DO              reduce using rule 35 (expression -> simple_expression expression_aux .)
+    SEMICOLON       reduce using rule 35 (expression -> simple_expression expression_aux .)
+    TO              reduce using rule 35 (expression -> simple_expression expression_aux .)
+    RPAREN          reduce using rule 35 (expression -> simple_expression expression_aux .)
+
+
+state 64
+
+    (47) simple_expression -> simple_expression addop . term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+    (44) par_expression -> . LPAREN expression RPAREN
+
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+    LPAREN          shift and go to state 46
+
+    term                           shift and go to state 96
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+    par_expression                 shift and go to state 84
+
+state 65
+
+    (36) expression_aux -> relop . simple_expression
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    simple_expression              shift and go to state 97
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 66
+
+    (37) expression_aux -> empty .
+
+    THEN            reduce using rule 37 (expression_aux -> empty .)
+    DO              reduce using rule 37 (expression_aux -> empty .)
+    SEMICOLON       reduce using rule 37 (expression_aux -> empty .)
+    TO              reduce using rule 37 (expression_aux -> empty .)
+    RPAREN          reduce using rule 37 (expression_aux -> empty .)
+
+
+state 67
+
+    (48) addop -> PLUS .
+
+    NOT             reduce using rule 48 (addop -> PLUS .)
+    MINUS           reduce using rule 48 (addop -> PLUS .)
+    ID              reduce using rule 48 (addop -> PLUS .)
+    NUMBER          reduce using rule 48 (addop -> PLUS .)
+    LPAREN          reduce using rule 48 (addop -> PLUS .)
+
+
+state 68
+
+    (49) addop -> MINUS .
+
+    NOT             reduce using rule 49 (addop -> MINUS .)
+    MINUS           reduce using rule 49 (addop -> MINUS .)
+    ID              reduce using rule 49 (addop -> MINUS .)
+    NUMBER          reduce using rule 49 (addop -> MINUS .)
+    LPAREN          reduce using rule 49 (addop -> MINUS .)
+
+
+state 69
+
+    (50) addop -> OR .
+
+    NOT             reduce using rule 50 (addop -> OR .)
+    MINUS           reduce using rule 50 (addop -> OR .)
+    ID              reduce using rule 50 (addop -> OR .)
+    NUMBER          reduce using rule 50 (addop -> OR .)
+    LPAREN          reduce using rule 50 (addop -> OR .)
+
+
+state 70
+
+    (38) relop -> EQUAL .
+
+    LPAREN          reduce using rule 38 (relop -> EQUAL .)
+    NOT             reduce using rule 38 (relop -> EQUAL .)
+    MINUS           reduce using rule 38 (relop -> EQUAL .)
+    ID              reduce using rule 38 (relop -> EQUAL .)
+    NUMBER          reduce using rule 38 (relop -> EQUAL .)
+
+
+state 71
+
+    (39) relop -> LESS .
+
+    LPAREN          reduce using rule 39 (relop -> LESS .)
+    NOT             reduce using rule 39 (relop -> LESS .)
+    MINUS           reduce using rule 39 (relop -> LESS .)
+    ID              reduce using rule 39 (relop -> LESS .)
+    NUMBER          reduce using rule 39 (relop -> LESS .)
+
+
+state 72
+
+    (40) relop -> LESSEQUAL .
+
+    LPAREN          reduce using rule 40 (relop -> LESSEQUAL .)
+    NOT             reduce using rule 40 (relop -> LESSEQUAL .)
+    MINUS           reduce using rule 40 (relop -> LESSEQUAL .)
+    ID              reduce using rule 40 (relop -> LESSEQUAL .)
+    NUMBER          reduce using rule 40 (relop -> LESSEQUAL .)
+
+
+state 73
+
+    (41) relop -> GREATER .
+
+    LPAREN          reduce using rule 41 (relop -> GREATER .)
+    NOT             reduce using rule 41 (relop -> GREATER .)
+    MINUS           reduce using rule 41 (relop -> GREATER .)
+    ID              reduce using rule 41 (relop -> GREATER .)
+    NUMBER          reduce using rule 41 (relop -> GREATER .)
+
+
+state 74
+
+    (42) relop -> GREATEREQUAL .
+
+    LPAREN          reduce using rule 42 (relop -> GREATEREQUAL .)
+    NOT             reduce using rule 42 (relop -> GREATEREQUAL .)
+    MINUS           reduce using rule 42 (relop -> GREATEREQUAL .)
+    ID              reduce using rule 42 (relop -> GREATEREQUAL .)
+    NUMBER          reduce using rule 42 (relop -> GREATEREQUAL .)
+
+
+state 75
+
+    (43) relop -> LESSGREATER .
+
+    LPAREN          reduce using rule 43 (relop -> LESSGREATER .)
+    NOT             reduce using rule 43 (relop -> LESSGREATER .)
+    MINUS           reduce using rule 43 (relop -> LESSGREATER .)
+    ID              reduce using rule 43 (relop -> LESSGREATER .)
+    NUMBER          reduce using rule 43 (relop -> LESSGREATER .)
+
+
+state 76
+
+    (56) term -> term mulop . factor_a
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+    (44) par_expression -> . LPAREN expression RPAREN
+
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+    LPAREN          shift and go to state 46
+
+    factor_a                       shift and go to state 98
+    factor                         shift and go to state 47
+    par_expression                 shift and go to state 84
+
+state 77
+
+    (51) mulop -> MULTI .
+
+    NOT             reduce using rule 51 (mulop -> MULTI .)
+    MINUS           reduce using rule 51 (mulop -> MULTI .)
+    ID              reduce using rule 51 (mulop -> MULTI .)
+    NUMBER          reduce using rule 51 (mulop -> MULTI .)
+    LPAREN          reduce using rule 51 (mulop -> MULTI .)
+
+
+state 78
+
+    (52) mulop -> DIVIDE .
+
+    NOT             reduce using rule 52 (mulop -> DIVIDE .)
+    MINUS           reduce using rule 52 (mulop -> DIVIDE .)
+    ID              reduce using rule 52 (mulop -> DIVIDE .)
+    NUMBER          reduce using rule 52 (mulop -> DIVIDE .)
+    LPAREN          reduce using rule 52 (mulop -> DIVIDE .)
+
+
+state 79
+
+    (53) mulop -> MOD .
+
+    NOT             reduce using rule 53 (mulop -> MOD .)
+    MINUS           reduce using rule 53 (mulop -> MOD .)
+    ID              reduce using rule 53 (mulop -> MOD .)
+    NUMBER          reduce using rule 53 (mulop -> MOD .)
+    LPAREN          reduce using rule 53 (mulop -> MOD .)
+
+
+state 80
+
+    (54) mulop -> AND .
+
+    NOT             reduce using rule 54 (mulop -> AND .)
+    MINUS           reduce using rule 54 (mulop -> AND .)
+    ID              reduce using rule 54 (mulop -> AND .)
+    NUMBER          reduce using rule 54 (mulop -> AND .)
+    LPAREN          reduce using rule 54 (mulop -> AND .)
+
+
+state 81
+
+    (46) simple_expression -> par_expression INTERROGATION . simple_expression COLON simple_expression
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    par_expression                 shift and go to state 44
+    simple_expression              shift and go to state 99
+    term                           shift and go to state 43
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 82
+
+    (44) par_expression -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 100
+
+
+state 83
+
+    (58) factor_a -> NOT factor .
+
+    MULTI           reduce using rule 58 (factor_a -> NOT factor .)
+    DIVIDE          reduce using rule 58 (factor_a -> NOT factor .)
+    MOD             reduce using rule 58 (factor_a -> NOT factor .)
+    AND             reduce using rule 58 (factor_a -> NOT factor .)
+    PLUS            reduce using rule 58 (factor_a -> NOT factor .)
+    MINUS           reduce using rule 58 (factor_a -> NOT factor .)
+    OR              reduce using rule 58 (factor_a -> NOT factor .)
+    EQUAL           reduce using rule 58 (factor_a -> NOT factor .)
+    LESS            reduce using rule 58 (factor_a -> NOT factor .)
+    LESSEQUAL       reduce using rule 58 (factor_a -> NOT factor .)
+    GREATER         reduce using rule 58 (factor_a -> NOT factor .)
+    GREATEREQUAL    reduce using rule 58 (factor_a -> NOT factor .)
+    LESSGREATER     reduce using rule 58 (factor_a -> NOT factor .)
+    THEN            reduce using rule 58 (factor_a -> NOT factor .)
+    DO              reduce using rule 58 (factor_a -> NOT factor .)
+    SEMICOLON       reduce using rule 58 (factor_a -> NOT factor .)
+    TO              reduce using rule 58 (factor_a -> NOT factor .)
+    RPAREN          reduce using rule 58 (factor_a -> NOT factor .)
+    COLON           reduce using rule 58 (factor_a -> NOT factor .)
+
+
+state 84
+
+    (62) factor -> par_expression .
+
+    MULTI           reduce using rule 62 (factor -> par_expression .)
+    DIVIDE          reduce using rule 62 (factor -> par_expression .)
+    MOD             reduce using rule 62 (factor -> par_expression .)
+    AND             reduce using rule 62 (factor -> par_expression .)
+    PLUS            reduce using rule 62 (factor -> par_expression .)
+    MINUS           reduce using rule 62 (factor -> par_expression .)
+    OR              reduce using rule 62 (factor -> par_expression .)
+    EQUAL           reduce using rule 62 (factor -> par_expression .)
+    LESS            reduce using rule 62 (factor -> par_expression .)
+    LESSEQUAL       reduce using rule 62 (factor -> par_expression .)
+    GREATER         reduce using rule 62 (factor -> par_expression .)
+    GREATEREQUAL    reduce using rule 62 (factor -> par_expression .)
+    LESSGREATER     reduce using rule 62 (factor -> par_expression .)
+    THEN            reduce using rule 62 (factor -> par_expression .)
+    DO              reduce using rule 62 (factor -> par_expression .)
+    SEMICOLON       reduce using rule 62 (factor -> par_expression .)
+    TO              reduce using rule 62 (factor -> par_expression .)
+    RPAREN          reduce using rule 62 (factor -> par_expression .)
+    COLON           reduce using rule 62 (factor -> par_expression .)
+
+
+state 85
+
+    (59) factor_a -> MINUS factor .
+
+    MULTI           reduce using rule 59 (factor_a -> MINUS factor .)
+    DIVIDE          reduce using rule 59 (factor_a -> MINUS factor .)
+    MOD             reduce using rule 59 (factor_a -> MINUS factor .)
+    AND             reduce using rule 59 (factor_a -> MINUS factor .)
+    PLUS            reduce using rule 59 (factor_a -> MINUS factor .)
+    MINUS           reduce using rule 59 (factor_a -> MINUS factor .)
+    OR              reduce using rule 59 (factor_a -> MINUS factor .)
+    EQUAL           reduce using rule 59 (factor_a -> MINUS factor .)
+    LESS            reduce using rule 59 (factor_a -> MINUS factor .)
+    LESSEQUAL       reduce using rule 59 (factor_a -> MINUS factor .)
+    GREATER         reduce using rule 59 (factor_a -> MINUS factor .)
+    GREATEREQUAL    reduce using rule 59 (factor_a -> MINUS factor .)
+    LESSGREATER     reduce using rule 59 (factor_a -> MINUS factor .)
+    THEN            reduce using rule 59 (factor_a -> MINUS factor .)
+    DO              reduce using rule 59 (factor_a -> MINUS factor .)
+    SEMICOLON       reduce using rule 59 (factor_a -> MINUS factor .)
+    TO              reduce using rule 59 (factor_a -> MINUS factor .)
+    RPAREN          reduce using rule 59 (factor_a -> MINUS factor .)
+    COLON           reduce using rule 59 (factor_a -> MINUS factor .)
+
+
+state 86
+
+    (26) while_statement -> WHILE condition DO . statement_list END
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    statement_list                 shift and go to state 101
+    statement                      shift and go to state 16
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 87
+
+    (27) do_while_statement -> DO statement_list do_while_statement_suffix .
+
+    SEMICOLON       reduce using rule 27 (do_while_statement -> DO statement_list do_while_statement_suffix .)
+
+
+state 88
+
+    (28) do_while_statement_suffix -> WHILE . condition
+    (34) condition -> . expression
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    condition                      shift and go to state 102
+    expression                     shift and go to state 41
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 89
+
+    (29) for_statement -> FOR assign_statement TO . condition DO statement_list END
+    (34) condition -> . expression
+    (35) expression -> . simple_expression expression_aux
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    condition                      shift and go to state 103
+    expression                     shift and go to state 41
+    simple_expression              shift and go to state 42
+    term                           shift and go to state 43
+    par_expression                 shift and go to state 44
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 90
+
+    (30) read_statement -> READ LPAREN ID . RPAREN
+
+    RPAREN          shift and go to state 104
+
+
+state 91
+
+    (31) write_statement -> WRITE LPAREN writable . RPAREN
+
+    RPAREN          shift and go to state 105
+
+
+state 92
+
+    (32) writable -> simple_expression .
+    (47) simple_expression -> simple_expression . addop term
+    (48) addop -> . PLUS
+    (49) addop -> . MINUS
+    (50) addop -> . OR
+
+    RPAREN          reduce using rule 32 (writable -> simple_expression .)
+    PLUS            shift and go to state 67
+    MINUS           shift and go to state 68
+    OR              shift and go to state 69
+
+    addop                          shift and go to state 64
+
+state 93
+
+    (33) writable -> literal .
+
+    RPAREN          reduce using rule 33 (writable -> literal .)
+
+
+state 94
+
+    (63) literal -> LITERAL .
+
+    RPAREN          reduce using rule 63 (literal -> LITERAL .)
+
+
+state 95
+
+    (23) if_statement -> IF condition THEN statement_list . if_statement_aux
+    (24) if_statement_aux -> . END
+    (25) if_statement_aux -> . ELSE statement_list END
+
+    END             shift and go to state 107
+    ELSE            shift and go to state 108
+
+    if_statement_aux               shift and go to state 106
+
+state 96
+
+    (47) simple_expression -> simple_expression addop term .
+    (56) term -> term . mulop factor_a
+    (51) mulop -> . MULTI
+    (52) mulop -> . DIVIDE
+    (53) mulop -> . MOD
+    (54) mulop -> . AND
+
+    PLUS            reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    MINUS           reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    OR              reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    EQUAL           reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    LESS            reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    LESSEQUAL       reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    GREATER         reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    GREATEREQUAL    reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    LESSGREATER     reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    THEN            reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    DO              reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    SEMICOLON       reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    TO              reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    RPAREN          reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    COLON           reduce using rule 47 (simple_expression -> simple_expression addop term .)
+    MULTI           shift and go to state 77
+    DIVIDE          shift and go to state 78
+    MOD             shift and go to state 79
+    AND             shift and go to state 80
+
+    mulop                          shift and go to state 76
+
+state 97
+
+    (36) expression_aux -> relop simple_expression .
+    (47) simple_expression -> simple_expression . addop term
+    (48) addop -> . PLUS
+    (49) addop -> . MINUS
+    (50) addop -> . OR
+
+    THEN            reduce using rule 36 (expression_aux -> relop simple_expression .)
+    DO              reduce using rule 36 (expression_aux -> relop simple_expression .)
+    SEMICOLON       reduce using rule 36 (expression_aux -> relop simple_expression .)
+    TO              reduce using rule 36 (expression_aux -> relop simple_expression .)
+    RPAREN          reduce using rule 36 (expression_aux -> relop simple_expression .)
+    PLUS            shift and go to state 67
+    MINUS           shift and go to state 68
+    OR              shift and go to state 69
+
+    addop                          shift and go to state 64
+
+state 98
+
+    (56) term -> term mulop factor_a .
+
+    MULTI           reduce using rule 56 (term -> term mulop factor_a .)
+    DIVIDE          reduce using rule 56 (term -> term mulop factor_a .)
+    MOD             reduce using rule 56 (term -> term mulop factor_a .)
+    AND             reduce using rule 56 (term -> term mulop factor_a .)
+    PLUS            reduce using rule 56 (term -> term mulop factor_a .)
+    MINUS           reduce using rule 56 (term -> term mulop factor_a .)
+    OR              reduce using rule 56 (term -> term mulop factor_a .)
+    EQUAL           reduce using rule 56 (term -> term mulop factor_a .)
+    LESS            reduce using rule 56 (term -> term mulop factor_a .)
+    LESSEQUAL       reduce using rule 56 (term -> term mulop factor_a .)
+    GREATER         reduce using rule 56 (term -> term mulop factor_a .)
+    GREATEREQUAL    reduce using rule 56 (term -> term mulop factor_a .)
+    LESSGREATER     reduce using rule 56 (term -> term mulop factor_a .)
+    THEN            reduce using rule 56 (term -> term mulop factor_a .)
+    DO              reduce using rule 56 (term -> term mulop factor_a .)
+    SEMICOLON       reduce using rule 56 (term -> term mulop factor_a .)
+    TO              reduce using rule 56 (term -> term mulop factor_a .)
+    RPAREN          reduce using rule 56 (term -> term mulop factor_a .)
+    COLON           reduce using rule 56 (term -> term mulop factor_a .)
+
+
+state 99
+
+    (46) simple_expression -> par_expression INTERROGATION simple_expression . COLON simple_expression
+    (47) simple_expression -> simple_expression . addop term
+    (48) addop -> . PLUS
+    (49) addop -> . MINUS
+    (50) addop -> . OR
+
+    COLON           shift and go to state 109
+    PLUS            shift and go to state 67
+    MINUS           shift and go to state 68
+    OR              shift and go to state 69
+
+    addop                          shift and go to state 64
+
+state 100
+
+    (44) par_expression -> LPAREN expression RPAREN .
+
+    INTERROGATION   reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    MULTI           reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    MOD             reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    EQUAL           reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    LESS            reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    LESSEQUAL       reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    GREATER         reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    GREATEREQUAL    reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    LESSGREATER     reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    DO              reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    TO              reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+    COLON           reduce using rule 44 (par_expression -> LPAREN expression RPAREN .)
+
+
+state 101
+
+    (26) while_statement -> WHILE condition DO statement_list . END
+
+    END             shift and go to state 110
+
+
+state 102
+
+    (28) do_while_statement_suffix -> WHILE condition .
+
+    SEMICOLON       reduce using rule 28 (do_while_statement_suffix -> WHILE condition .)
+
+
+state 103
+
+    (29) for_statement -> FOR assign_statement TO condition . DO statement_list END
+
+    DO              shift and go to state 111
+
+
+state 104
+
+    (30) read_statement -> READ LPAREN ID RPAREN .
+
+    SEMICOLON       reduce using rule 30 (read_statement -> READ LPAREN ID RPAREN .)
+
+
+state 105
+
+    (31) write_statement -> WRITE LPAREN writable RPAREN .
+
+    SEMICOLON       reduce using rule 31 (write_statement -> WRITE LPAREN writable RPAREN .)
+
+
+state 106
+
+    (23) if_statement -> IF condition THEN statement_list if_statement_aux .
+
+    SEMICOLON       reduce using rule 23 (if_statement -> IF condition THEN statement_list if_statement_aux .)
+
+
+state 107
+
+    (24) if_statement_aux -> END .
+
+    SEMICOLON       reduce using rule 24 (if_statement_aux -> END .)
+
+
+state 108
+
+    (25) if_statement_aux -> ELSE . statement_list END
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    statement_list                 shift and go to state 112
+    statement                      shift and go to state 16
+    assign_statement               shift and go to state 17
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 109
+
+    (46) simple_expression -> par_expression INTERROGATION simple_expression COLON . simple_expression
+    (45) simple_expression -> . term
+    (46) simple_expression -> . par_expression INTERROGATION simple_expression COLON simple_expression
+    (47) simple_expression -> . simple_expression addop term
+    (55) term -> . factor_a
+    (56) term -> . term mulop factor_a
+    (44) par_expression -> . LPAREN expression RPAREN
+    (57) factor_a -> . factor
+    (58) factor_a -> . NOT factor
+    (59) factor_a -> . MINUS factor
+    (60) factor -> . ID
+    (61) factor -> . NUMBER
+    (62) factor -> . par_expression
+
+    LPAREN          shift and go to state 46
+    NOT             shift and go to state 48
+    MINUS           shift and go to state 49
+    ID              shift and go to state 50
+    NUMBER          shift and go to state 51
+
+    par_expression                 shift and go to state 44
+    simple_expression              shift and go to state 113
+    term                           shift and go to state 43
+    factor_a                       shift and go to state 45
+    factor                         shift and go to state 47
+
+state 110
+
+    (26) while_statement -> WHILE condition DO statement_list END .
+
+    SEMICOLON       reduce using rule 26 (while_statement -> WHILE condition DO statement_list END .)
+
+
+state 111
+
+    (29) for_statement -> FOR assign_statement TO condition DO . statement_list END
+    (12) statement_list -> . statement SEMICOLON statement_prime
+    (15) statement -> . assign_statement
+    (16) statement -> . if_statement
+    (17) statement -> . while_statement
+    (18) statement -> . for_statement
+    (19) statement -> . read_statement
+    (20) statement -> . write_statement
+    (21) statement -> . do_while_statement
+    (22) assign_statement -> . ID ASSIGN expression
+    (23) if_statement -> . IF condition THEN statement_list if_statement_aux
+    (26) while_statement -> . WHILE condition DO statement_list END
+    (29) for_statement -> . FOR assign_statement TO condition DO statement_list END
+    (30) read_statement -> . READ LPAREN ID RPAREN
+    (31) write_statement -> . WRITE LPAREN writable RPAREN
+    (27) do_while_statement -> . DO statement_list do_while_statement_suffix
+
+    ID              shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 28
+    READ            shift and go to state 29
+    WRITE           shift and go to state 30
+    DO              shift and go to state 27
+
+    assign_statement               shift and go to state 17
+    statement_list                 shift and go to state 114
+    statement                      shift and go to state 16
+    if_statement                   shift and go to state 18
+    while_statement                shift and go to state 19
+    for_statement                  shift and go to state 20
+    read_statement                 shift and go to state 21
+    write_statement                shift and go to state 22
+    do_while_statement             shift and go to state 23
+
+state 112
+
+    (25) if_statement_aux -> ELSE statement_list . END
+
+    END             shift and go to state 115
+
+
+state 113
+
+    (46) simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .
+    (47) simple_expression -> simple_expression . addop term
+    (48) addop -> . PLUS
+    (49) addop -> . MINUS
+    (50) addop -> . OR
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    EQUAL           reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    LESS            reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    LESSEQUAL       reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    GREATER         reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    GREATEREQUAL    reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    LESSGREATER     reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    THEN            reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    DO              reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    SEMICOLON       reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    TO              reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    RPAREN          reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    COLON           reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .)
+    PLUS            shift and go to state 67
+    MINUS           shift and go to state 68
+    OR              shift and go to state 69
+
+  ! PLUS            [ reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .) ]
+  ! MINUS           [ reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .) ]
+  ! OR              [ reduce using rule 46 (simple_expression -> par_expression INTERROGATION simple_expression COLON simple_expression .) ]
+
+    addop                          shift and go to state 64
+
+state 114
+
+    (29) for_statement -> FOR assign_statement TO condition DO statement_list . END
+
+    END             shift and go to state 116
+
+
+state 115
+
+    (25) if_statement_aux -> ELSE statement_list END .
+
+    SEMICOLON       reduce using rule 25 (if_statement_aux -> ELSE statement_list END .)
+
+
+state 116
+
+    (29) for_statement -> FOR assign_statement TO condition DO statement_list END .
+
+    SEMICOLON       reduce using rule 29 (for_statement -> FOR assign_statement TO condition DO statement_list END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for WHILE in state 38 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 113 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 113 resolved as shift
+WARNING: shift/reduce conflict for OR in state 113 resolved as shift

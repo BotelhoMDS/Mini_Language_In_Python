@@ -6,6 +6,6 @@ begin
     read (a);
     read (c);
     b := 10;
-    result := (a * c)/(b + 5 % 345 -3) ;
+    result := (a * c)/(b + 5% 345 -3) ;
     write(result)
 end 

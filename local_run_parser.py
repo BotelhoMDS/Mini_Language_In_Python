@@ -11,7 +11,7 @@ x = parser()
 
 
 try:
-    s = read_file('./lexer_tests/teste6.txt')
+    s = read_file('./lexer_tests/teste9.txt')
 except EOFError:
     print("Error")
 result = x.parser.parse(s)

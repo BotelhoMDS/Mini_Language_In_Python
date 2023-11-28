@@ -8,7 +8,7 @@ begin
     do
         write("Idade: ");
         read (id);
-        soma := soma # id;
+        soma := soma + id;
         cont := cont - 1;
     while(cont > 0);
     write("Media: ");
