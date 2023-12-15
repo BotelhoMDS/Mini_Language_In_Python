@@ -117,6 +117,8 @@ class lexer(object):
     t_EQUAL = r'='
     t_LESS = r'<'
     t_GREATER = r'>'
+    t_LESSEQUAL = r'<='
+    t_GREATEREQUAL = r'>='
     t_ASSIGN = r':='
     t_DOT = r'\.'
     t_DOUBLEGREATER = r'>>'
