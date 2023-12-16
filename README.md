@@ -98,7 +98,9 @@ The main challenge in semantic analysis is dealing with the ambiguity and variet
 The yacc librarie allows us create the roles for verify context in the code. 
 
 #### PROJECT MEMBERS/CONTACT
-Arthur Laender De Paula - crashertn@gmail.com
-Hiroto Sato Tanaka - hirotosato12@gmail.com
-Harisson Douglas Siqueira Pires - harissonsiqueira@gmail.com
-Matheus Botelho Menezes dos Santos - matheus.botelho@unifei.edu
+Claro, aqui está a lista com os nomes em formato de lista com bullets:
+
+- Arthur Laender De Paula - crashertn@gmail.com
+- Hiroto Sato Tanaka - hirotosato12@gmail.com
+- Harisson Douglas Siqueira Pires - harissonsiqueira@gmail.com
+- Matheus Botelho Menezes dos Santos - matheus.botelho@unifei.edu
