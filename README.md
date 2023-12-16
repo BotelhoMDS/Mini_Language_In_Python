@@ -105,6 +105,10 @@ The main challenge in semantic analysis is dealing with the ambiguity and variet
 #### SEMANTIC - ANALISADOR SEMÂNTICO
 The yacc librarie allows us create the roles for verify context in the code. 
 
+#### CODE GENERATION - GERADOR DE CÓDIGO
+
+The code generation is the final part of the front end of our copiler, but in our project until this moment, we don't construct it, but if you wanna try, you can use the LLVM, it is a librarie for infraestruture project for compilers and he has a librarie for python. **(llvmlite)**
+
 #### PROJECT MEMBERS/CONTACT
 
 If you have any questions, please contact us, and if the project helped you, leave a star so that more people can find it! If there are changes or improvements, contribute to us so that more people have access to the compiled knowledge! Happy studying, **see you later and thanks for the fish!**
@@ -115,3 +119,11 @@ Se tiver alguma dúvida entre em contato conosco, e se o projeto te ajudou deixe
 - Hiroto Sato Tanaka - hirotosato12@gmail.com
 - Harisson Douglas Siqueira Pires - harissonsiqueira@gmail.com
 - Matheus Botelho Menezes dos Santos - matheus.botelho@unifei.edu
+
+#### REFERENCES/REFERÊNCIAS 
+
+https://www.dabeaz.com/ply/ply.html - The documentation base for the project 
+
+https://youtu.be/6DoYU3LiM0A?si=0OB3OVstMdLB3mZI - Yotube video with informations about Ply 
+
+ 
