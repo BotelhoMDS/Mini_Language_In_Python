@@ -31,6 +31,14 @@ Você pode ver o teste escrito no arquivo **local_run.py** na linha seis.
 se você quiser rodar outro teste, apenas mude o nome do arquivo na linha seis.
 você pode colocar um arquivo de texto para teste, mude a string no teste para a função read_file como na linha quatorze.
 
+```
+python local_run_parser.py
+```
+
+for you can run the syntatic moduler and the semantic, you will need run the **local_run_parser.py**, it call the yacc moduler created in the **yacc.py**. 
+
+Para você rodar o modulo sintatico, você deve rodar o arquivo **lcoal_run_parser.py**, ele utilizará o yacc no arquivo **yacc.py** para criar as regras sintaticas e semânticas. 
+
 
 
 
@@ -98,6 +106,10 @@ The main challenge in semantic analysis is dealing with the ambiguity and variet
 The yacc librarie allows us create the roles for verify context in the code. 
 
 #### PROJECT MEMBERS/CONTACT
+
+If you have any questions, please contact us, and if the project helped you, leave a star so that more people can find it! If there are changes or improvements, contribute to us so that more people have access to the compiled knowledge! Happy studying, **see you later and thanks for the fish!**
+
+Se tiver alguma dúvida entre em contato conosco, e se o projeto te ajudou deixe uma estrela para que mais pessoas se encontrem! Se houver alterações ou melhorias, contribua conosco para que mais pessoas tenham acesso ao conhecimento em compilado! Bons estudos, **até logo e obrigado pelos peixes** 
 
 - Arthur Laender De Paula - crashertn@gmail.com
 - Hiroto Sato Tanaka - hirotosato12@gmail.com
