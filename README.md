@@ -86,3 +86,12 @@ About the lexer constrution and model, we use the PLY package, this package is a
 
 in the lexer we created the tokens and the rules for the tokens, the tokens are the symbols of the language, like the operators, the reserved words, the identifiers, the numbers, etc. the rules are the regular expressions that define the tokens in the text file. We as too the symbol table, who is reposible for save the identifiers in the text file for each escope.
 
+#### SEMANTICO - ANALISADOR SEMÂNTICO
+A semantic analyzer is a crucial tool in computational linguistics and natural language processing (NLP). Its primary function is to understand and interpret the meaning of texts or sentences. The semantic analyzer goes beyond grammatical analysis, which focuses on sentence structure, and aims to understand the contextual meaning and relationships between words.
+
+To achieve this, the semantic analyzer employs algorithms and artificial intelligence models trained to recognize linguistic patterns and associate them with meanings. This approach enables machines to comprehend human language more deeply, facilitating applications such as automatic translation, virtual assistants, sentiment analysis in texts, and more.
+
+The main challenge in semantic analysis is dealing with the ambiguity and variety of human language, necessitating ongoing improvements and adaptations in the models used.
+
+
+
