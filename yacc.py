@@ -73,6 +73,10 @@ class parser(object):
 
     def p_assign_statement(self,p):#Voltar pra revisar
         '''assign_statement : ID ASSIGN expression'''
+        if not self.lexer.verify_symbol_in_this_scope(p[1]):
+            print(f"Semantic Error: {p[1]} not found")
+        if not self.lexer.verify_symbol_in_this_scope(p[3]):
+            print(f"Semantic Error: {p[3]} not found")
 
     def p_if_statement(self,p):
         '''if_statement : IF condition THEN statement_list if_statement_aux'''
@@ -96,15 +100,18 @@ class parser(object):
 
     def p_read_statement(self,p):
         '''read_statement : READ LPAREN ID RPAREN'''
-        
+        if not self.lexer.verify_symbol_in_this_scope(p[3]):
+            print(f"Semantic Error: {p[3]} not found")
+
     def p_write_statement(self,p):
         '''write_statement : WRITE LPAREN writable RPAREN'''
-        
 
     def p_writable(self,p):
         '''writable : simple_expression
                         | literal'''
         p[0]=p[1]
+        if p[1] is not self.lexer:
+            print("Semantic Error: p[1] not found")
 
     def p_condition(self,p):
         '''condition : expression'''
