@@ -93,6 +93,7 @@ class lexer(object):
 
     def verify_symbol_in_this_scope(self, symbol):
         return self.escope.current_table().verify_symbol(symbol)
+
     def get_symbol(self, symbol): # run in the scopes from the actual for the global 
         for table in reversed(self.escope.table_stack):
             if table.verify_symbol(symbol):
@@ -138,12 +139,12 @@ class lexer(object):
         r"""[a-zA-Z][a-zA-Z0-9]*"""
         t.type = self.reserved.get(t.value, 'ID')    # Check for reserved words
         print(f"achou {t}")
-        if t.type == 'ID':
-            if not self.verify_symbol_in_this_scope(t.value): #dont't add the symbol if it already exists
-                self.add_symbol(t.value, value=None) # add a new symbol to the symbol table
+        ##if t.type == 'ID':
+        ##    if not self.verify_symbol_in_this_scope(t.value): #dont't add the symbol if it already exists
+        ##        self.add_symbol(t.value, value=None) # add a new symbol to the symbol table
         return t
         
-    
+
     def t_LITERAL(self, t):
         r'\"[^"]*\"'
         return t

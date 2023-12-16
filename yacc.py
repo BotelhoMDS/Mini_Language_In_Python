@@ -22,7 +22,6 @@ class parser(object):
 
     def p_declaration_list(self,p):
         '''declaration_list : declaration SEMICOLON declaration_list_aux'''
-        p[0] = p[1] + ';' + p[3]
 
     def p_declaration_list_aux(self,p):#Auxiliar pra evitar ambiguidade
         '''declaration_list_aux : declaration_list
@@ -31,8 +30,9 @@ class parser(object):
     
     def p_declaration(self,p):
         '''declaration : type identifier_list'''
-        p[0].type = p[1].type
-
+        for t in p[2]:
+            if not self.lexer.verify_symbol_in_this_scope(t): #dont't add the symbol if it already exists
+                self.lexer.add_symbol(t, value=None) # add a new symbol to the symbol table
 
     def p_identifier_list(self,p):#VERIFICAR
         '''identifier_list : ID identifier_list_aux'''  
@@ -73,7 +73,6 @@ class parser(object):
 
     def p_assign_statement(self,p):#Voltar pra revisar
         '''assign_statement : ID ASSIGN expression'''
-        p[0] = p[1] + p[2] + p[3]
 
     def p_if_statement(self,p):
         '''if_statement : IF condition THEN statement_list if_statement_aux'''
@@ -97,10 +96,10 @@ class parser(object):
 
     def p_read_statement(self,p):
         '''read_statement : READ LPAREN ID RPAREN'''
-
+        
     def p_write_statement(self,p):
         '''write_statement : WRITE LPAREN writable RPAREN'''
-        p[0]=p[3]
+        
 
     def p_writable(self,p):
         '''writable : simple_expression
@@ -114,9 +113,11 @@ class parser(object):
 
     def p_expression(self,p):
         '''expression : simple_expression expression_aux'''
+
     def p_expression_aux(self,p):
         '''expression_aux : relop simple_expression
                     | empty'''
+        
         p[0]=p[1]
     def p_relop(self,p):
         '''relop : EQUAL 
@@ -137,19 +138,6 @@ class parser(object):
                             | simple_expression addop term'''
         if (len(p) == 2):#term
             p[0]=p[1]
-        elif (len(p) == 4):
-            if p[2] == '+':#simple_expression addop term
-                p[0]= p[1] + p[3]
-            if p[2] == '-':
-                p[0]= p[1] - p[3]
-            if p[2] == 'or':
-                p[0]= p[1] or p[3]
-        elif (len(p) == 6):#par_expression INTERROGATION simple_expression COLON simple_expression
-            if isinstance(p[1]==bool):
-                if p[1] == True:
-                    p[0] = p[3]
-                else:
-                    p[0] = p[5]
 
 
     def p_addop(self,p):
@@ -168,8 +156,9 @@ class parser(object):
     def p_term(self,p):
         '''term : factor_a
                 | term mulop factor_a'''
-        p[0]=p[1]
-        
+        if (len(p) == 2):
+            p[0]=p[1]
+
     def p_factor_a(self,p):#Ver depois
         '''factor_a : factor 
                 | NOT factor 
@@ -185,7 +174,6 @@ class parser(object):
         '''factor : ID 
                 | NUMBER 
                 | par_expression'''
-        p[0]=p[1]
 
     def p_literal(self,p):
         '''literal : LITERAL'''
