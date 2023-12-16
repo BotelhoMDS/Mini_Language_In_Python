@@ -86,3 +86,15 @@ About the lexer constrution and model, we use the PLY package, this package is a
 
 in the lexer we created the tokens and the rules for the tokens, the tokens are the symbols of the language, like the operators, the reserved words, the identifiers, the numbers, etc. the rules are the regular expressions that define the tokens in the text file. We as too the symbol table, who is reposible for save the identifiers in the text file for each escope.
 
+#### SYNTATIC - ANALISADOR SINTÁTICO
+About the syntatic we use the yacc for create the roles for verify the oder in the grammer, yacc use the LLAR for build the derivation tree. 
+
+
+#### SEMANTIC - ANALISADOR SEMÂNTICO
+The yacc librarie allows us create the roles for verify context in the code. 
+
+#### PROJECT MEMBERS/CONTACT
+Arthur Laender De Paula - crashertn@gmail.com
+Hiroto Sato Tanaka - hirotosato12@gmail.com
+Harisson Douglas Siqueira Pires - harissonsiqueira@gmail.com
+Matheus Botelho Menezes dos Santos - matheus.botelho@unifei.edu
